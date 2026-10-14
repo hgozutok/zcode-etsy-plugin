@@ -13,3 +13,6 @@ desktop.ini
 
 # NOTE: vendor/*/node_modules IS committed on purpose — the plugin ships with
 # its production dependencies so it works on any machine without npm install.
+
+# Local clone of the published repo — not part of the source
+zcode-etsy-plugin/
