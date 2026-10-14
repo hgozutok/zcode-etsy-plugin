@@ -5,11 +5,11 @@ Etsy mağaza ve ürün (listing) yönetimi için ZCode plugin'i. İçinde vendor
 Etsy Open API v3 üzerinden 41 araç — listing create/update/delete, görsel/video yükleme,
 envanter/stok, kargo profilleri, siparişler, yorumlar.
 
-Plugin **tek başına (standalone)** çalışır: tüm üretim bağımlılıkları
-(`vendor/etsy-mcp/node_modules`) paketin içindedir, saf JavaScript'tir ve
-Windows / Linux / macOS üzerinde değişiklik gerektirmeden çalışır. Kurulumdan sonra
-`npm install` gerekmez. Plugin içinde kimlik bilgisi tutulmaz — anahtarlar ortam
-değişkenlerinden veya `~/.etsy-mcp/config.json`'dan okunur.
+Plugin **tek başına (standalone)** çalışır: MCP sunucusu esbuild ile tek bir
+bağımlılıksız dosyaya derlenir (`vendor/etsy-mcp/server-bundle.mjs`, ~1.3 MB) ve
+Windows / Linux / macOS üzerinde `npm install` gerektirmeden çalışır. Plugin
+içinde kimlik bilgisi tutulmaz — anahtarlar ortam değişkenlerinden veya
+`~/.etsy-mcp/config.json`'dan okunur.
 
 [English README](./README.md) · [中文说明](./README_CN.md)
 
@@ -77,11 +77,12 @@ rsync -a --exclude '.video_agent' --exclude '.git' /c/Projects/etsyplugin/ user@
 ## Yapı
 
 ```
-.zcode-plugin/plugin.json   plugin manifest
-.mcp.json                   MCP server tanımı (node scripts/mcp-server.mjs)
-scripts/mcp-server.mjs      kimlik okuyan launcher
-skills/etsy-manager/SKILL.md  kullanım kılavuzu
-vendor/etsy-mcp/            derlenmiş upstream server (MIT) + prod bağımlılıkları
+.zcode-plugin/plugin.json          plugin manifest
+.mcp.json                          MCP server tanımı (node scripts/mcp-server.mjs)
+scripts/mcp-server.mjs             kimlik okuyan launcher
+skills/etsy-manager/SKILL.md       kullanım kılavuzu
+vendor/etsy-mcp/server-bundle.mjs  bağımlılıksız MCP sunucusu (esbuild bundle)
+vendor/etsy-mcp/src/               yamalanmış upstream TypeScript kaynakları
 ```
 
 ## Lisans

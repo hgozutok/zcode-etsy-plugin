@@ -5,10 +5,10 @@ inventory, shipping profiles, orders and reviews — 41 tools on top of the
 Etsy Open API v3, powered by a vendored copy of
 [aserper/etsy-mcp](https://github.com/aserper/etsy-mcp) (MIT).
 
-The plugin is fully **standalone**: all production dependencies are vendored
-(`vendor/etsy-mcp/node_modules`, pure JavaScript), so it runs on Windows, Linux
-and macOS without `npm install`. No credentials are stored inside the plugin —
-keys are read from your environment or `~/.etsy-mcp/config.json`.
+The plugin is fully **standalone**: the MCP server is bundled with esbuild into a
+single dependency-free file (`vendor/etsy-mcp/server-bundle.mjs`, ~1.3 MB), so it
+runs on Windows, Linux and macOS without `npm install`. No credentials are stored
+inside the plugin — keys are read from your environment or `~/.etsy-mcp/config.json`.
 
 [README (Türkçe)](./README_TR.md) · [README (中文)](./README_CN.md)
 
@@ -76,7 +76,8 @@ the file as a secret).
 .mcp.json                      MCP server definition (node scripts/mcp-server.mjs)
 scripts/mcp-server.mjs         credential-reading launcher
 skills/etsy-manager/SKILL.md   usage guide for the model
-vendor/etsy-mcp/               compiled upstream server (MIT) + prod dependencies
+vendor/etsy-mcp/server-bundle.mjs  self-contained MCP server (esbuild bundle)
+vendor/etsy-mcp/src/           patched upstream TypeScript sources (provenance)
 ```
 
 ## License

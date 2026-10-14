@@ -151,8 +151,13 @@ const currentFile = fileURLToPath(import.meta.url);
 const isDirectRun = process.argv[1] && currentFile === process.argv[1];
 
 if (isDirectRun) {
-  // Load .env file when running as CLI
-  await import("dotenv/config");
+  // Load .env file when running as CLI. Optional: a self-contained bundle
+  // (or plugin launcher) injects env vars directly and may not ship dotenv.
+  try {
+    await import("dotenv/config");
+  } catch {
+    // dotenv not installed — environment must already be configured.
+  }
   const apiKey = process.env.ETSY_API_KEY;
   const sharedSecret = process.env.ETSY_SHARED_SECRET;
 

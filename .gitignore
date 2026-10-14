@@ -16,3 +16,9 @@ desktop.ini
 
 # Local clone of the published repo — not part of the source
 zcode-etsy-plugin/
+
+# Vendored server build intermediates and dev deps — rebuildable via
+# (tsc && esbuild, see server-bundle.mjs header); the published artifact
+# is etsy-manager/vendor/etsy-mcp/server-bundle.mjs
+etsy-manager/vendor/etsy-mcp/node_modules/
+etsy-manager/vendor/etsy-mcp/dist/

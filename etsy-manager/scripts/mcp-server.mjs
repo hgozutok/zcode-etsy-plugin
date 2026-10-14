@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Launcher for the vendored etsy-mcp server (github.com/aserper/etsy-mcp, MIT).
+ * Launcher for the vendored etsy-mcp server (github.com/aserper/etsy-mcp, MIT),
+ * bundled with esbuild into a dependency-free server-bundle.mjs.
  *
  * Reads Etsy credentials from (first match wins):
  *   1. Real environment variables ETSY_API_KEY / ETSY_SHARED_SECRET
@@ -16,7 +17,7 @@ import { homedir } from "node:os";
 import { fileURLToPath } from "node:url";
 
 const pluginRoot = join(fileURLToPath(import.meta.url), "..", "..");
-const serverEntry = join(pluginRoot, "vendor", "etsy-mcp", "dist", "index.js");
+const serverEntry = join(pluginRoot, "vendor", "etsy-mcp", "server-bundle.mjs");
 const userConfigPath = join(homedir(), ".etsy-mcp", "config.json");
 
 const env = { ...process.env };

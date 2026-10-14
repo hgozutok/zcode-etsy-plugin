@@ -1,9 +1,29 @@
 import { createHash, randomBytes } from "node:crypto";
+import { spawn } from "node:child_process";
 import { createServer, type IncomingMessage, type ServerResponse } from "node:http";
 import type { StoredTokens } from "./token-store.js";
 
 const ETSY_AUTH_URL = "https://www.etsy.com/oauth/connect";
 const ETSY_TOKEN_URL = "https://api.etsy.com/v3/public/oauth/token";
+
+// Dependency-free cross-platform browser launch (replaces the `open` package
+// so the server can ship as a self-contained bundle).
+function openInBrowser(url: string): void {
+  const child =
+    process.platform === "win32"
+      ? spawn("cmd", ["/c", "start", "", url], {
+          detached: true,
+          stdio: "ignore",
+          windowsHide: true,
+        })
+      : process.platform === "darwin"
+        ? spawn("open", [url], { stdio: "ignore" })
+        : spawn("xdg-open", [url], { stdio: "ignore" });
+  // A missing opener (headless machine) is not fatal — the URL is already
+  // printed and returned to the caller.
+  child.on("error", () => {});
+  child.unref();
+}
 
 export interface OAuthConfig {
   apiKey: string;
@@ -193,8 +213,7 @@ export class OAuthClient {
             return;
           }
           try {
-            const { default: open } = await import("open");
-            await open(authData.url);
+            openInBrowser(authData.url);
           } catch {
             console.error(
               "Could not open a browser (headless machine?). Open the URL above manually."

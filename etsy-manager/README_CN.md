@@ -4,9 +4,10 @@
 库存、物流方案、订单与评价 —— 基于 Etsy Open API v3 的 41 个工具，内置
 [aserper/etsy-mcp](https://github.com/aserper/etsy-mcp)（MIT）的服务端。
 
-插件完全**独立运行**：全部生产依赖已内置于 `vendor/etsy-mcp/node_modules`（纯
-JavaScript），在 Windows / Linux / macOS 上无需 `npm install` 即可使用。插件
-本身不保存任何凭据 —— 密钥从环境变量或 `~/.etsy-mcp/config.json` 读取。
+插件完全**独立运行**：MCP 服务端经 esbuild 打包为单个无依赖文件
+（`vendor/etsy-mcp/server-bundle.mjs`，约 1.3 MB），在 Windows / Linux / macOS 上
+无需 `npm install` 即可使用。插件本身不保存任何凭据 —— 密钥从环境变量或
+`~/.etsy-mcp/config.json` 读取。
 
 [English README](./README.md) · [Türkçe README](./README_TR.md)
 
@@ -63,11 +64,12 @@ ssh -L 3737:localhost:3737 user@your-vps
 ## 目录结构
 
 ```
-.zcode-plugin/plugin.json      插件清单
-.mcp.json                      MCP 服务器定义（node scripts/mcp-server.mjs）
-scripts/mcp-server.mjs         读取凭据的启动器
-skills/etsy-manager/SKILL.md   模型使用指南
-vendor/etsy-mcp/               编译好的上游服务端（MIT）+ 生产依赖
+.zcode-plugin/plugin.json          插件清单
+.mcp.json                          MCP 服务器定义（node scripts/mcp-server.mjs）
+scripts/mcp-server.mjs             读取凭据的启动器
+skills/etsy-manager/SKILL.md       模型使用指南
+vendor/etsy-mcp/server-bundle.mjs  无依赖 MCP 服务端（esbuild 打包）
+vendor/etsy-mcp/src/               打过补丁的上游 TypeScript 源码
 ```
 
 ## 许可证
