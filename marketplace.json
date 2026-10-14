@@ -1,0 +1,16 @@
+{
+  "name": "gozutok-plugins",
+  "plugins": [
+    {
+      "name": "etsy-manager",
+      "source": "./etsy-manager",
+      "version": "0.1.1",
+      "description": "Manage Etsy shop products: create, update, delete listings, upload images, manage inventory, shipping and orders via the Etsy Open API v3",
+      "displayName": "Etsy Manager",
+      "author": {
+        "name": "Hugo",
+        "url": "https://gozutok.info"
+      }
+    }
+  ]
+}

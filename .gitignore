@@ -1,0 +1,15 @@
+# Machine-local state — never publish
+.video_agent/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# NOTE: vendor/*/node_modules IS committed on purpose — the plugin ships with
+# its production dependencies so it works on any machine without npm install.
